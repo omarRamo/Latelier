@@ -1,0 +1,9 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/CatMash-Solution/.vs/CatMash-Solution/v16
+/CatMash-Solution/CatMash.MVC/bin/Debug/netcoreapp3.1
+*.dll
+/CatMash-Solution/CatMash.API/obj

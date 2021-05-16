@@ -1,0 +1,30 @@
+﻿@model CatsModel
+
+<div class="row">
+    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading c-list">
+                <span class="title">Scores</span>
+            </div>
+
+            <ul class="list-group" id="contact-list">
+
+                @foreach (var cat in Model.Cats)
+                {
+    <li class="list-group-item">
+        <div class="col-xs-12 col-sm-4">
+            <img src="@cat?.Url" alt="cat id @cat.Id" class="img-responsive img-responsive" />
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            Score <span class="badge badge-light">@cat?.Score?.TotalScore</span> <br />
+            Nombre de votes <span class="badge badge-light">@cat?.Score?.VoteCount</span><br /><br />
+        </div>
+        <div class="clearfix"></div>
+    </li>}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
