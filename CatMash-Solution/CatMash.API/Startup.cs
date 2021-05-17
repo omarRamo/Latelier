@@ -1,7 +1,12 @@
+using AutoMapper;
 using CatMash.API.BusinessLogic;
+using CatMash.API.Utility;
+using CatMash.DataAccess;
+using CatMash.DataAccess.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +31,21 @@ namespace CatMash.API
         {
             services.AddControllersWithViews();
 
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddTransient<ICatPictureRepository, CatPictureRepository>();
             services.AddTransient<ICatService, CatService>();
+
+            //services.AddDbContext<CatMashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CatMashContext")));
+
+            services.AddDbContext<CatMashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CatMashContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +57,6 @@ namespace CatMash.API
             }
             else
             {
-                app.UseExceptionHandler("/Cat/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

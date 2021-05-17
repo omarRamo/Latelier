@@ -1,16 +1,13 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CatMash.API.Models
+namespace CatMash.API.DTO
 {
-    public class CatPicture
+    public class CatPictureDTO
     {
         public int Id { get; set; }
         public string Url { get; set; }
-        [IgnoreMap]
-        public Score Score { get; set; }
     }
 }

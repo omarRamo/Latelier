@@ -1,6 +1,11 @@
-﻿using CatMash.API.Messages;
+﻿using AutoMapper;
+using CatMash.API.DTO;
+using CatMash.API.Messages;
 using CatMash.API.Models;
 using CatMash.API.Utility;
+using CatMash.DataAccess.Entities;
+using CatMash.DataAccess.Repository;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +15,46 @@ namespace CatMash.API.BusinessLogic
 {
     public class CatService : ICatService
     {
+        private readonly ILogger<CatService> _logger;
+        private readonly IMapper _mapper;
+        private readonly ICatPictureRepository _catPictureRepository;
+        public CatService(ILogger<CatService> logger, IMapper mapper, ICatPictureRepository catPictureRepository)
+        {
+            _logger = logger;
+            _mapper = mapper;
+            _catPictureRepository = catPictureRepository;
+        }
         public CatPicturesResponse GetCats()
         {
-            // mock list of cats,
-            CatPicturesResponse cats = new CatPicturesResponse();
+            var listCatsPictures = _catPictureRepository.GetCatsPictures().ToList();
 
-            cats.Cats = new List<CatPicture>
+            var catsPictures = new List<CatPicture>();
+
+            foreach (var cat in listCatsPictures)
+            {
+                catsPictures.Add(new CatPicture
                 {
-                    new CatPicture{ Id=1, Url="http://25.media.tumblr.com/tumblr_m33r7lpy361qzi9p6o1_500.jpg", Score= ScoreCalculator.CalculateScore(8) },
-                    new CatPicture{ Id=2, Url="http://24.media.tumblr.com/tumblr_m1ku66jPWV1qze0hyo1_400.jpg", Score= ScoreCalculator.CalculateScore(3) },
-                    new CatPicture{ Id=2, Url="http://25.media.tumblr.com/tumblr_lyj0y5tg4L1qbwemzo1_1280.jpg", Score= ScoreCalculator.CalculateScore(2) },
-                    new CatPicture{ Id=3, Url="http://25.media.tumblr.com/Jjkybd3nS98hfqy8vevnj6R9_500.jpg", Score= ScoreCalculator.CalculateScore(0) }
-                };
+                    Id = cat.Id,
+                    Url = cat.Url,
+                    Score = ScoreCalculator.CalculateScore(cat.TVoteWinCat.Count())
+                });
+            }
 
-            return cats;
+            catsPictures = catsPictures.OrderBy(c => c.Score?.TotalScore)
+                     .OrderByDescending(c => c.Score?.TotalScore)
+                     .ThenBy(c => c.Id).ToList();
+
+            var listofT = new List<Tuple<CatPicture, CatPicture>>(); 
+            for (int i = 0; i < catsPictures.Count - 1;)
+            {
+                var t = new Tuple<CatPicture, CatPicture>(catsPictures[i], catsPictures[i + 1]);
+                listofT.Add(t);
+                i = i + 2;
+            }
+            return new CatPicturesResponse()
+            {
+                Cats = listofT
+            };
         }
     }
 }

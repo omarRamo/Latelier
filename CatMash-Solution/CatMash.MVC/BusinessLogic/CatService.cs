@@ -3,6 +3,7 @@ using CatMash.MVC.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace CatMash.MVC.BusinessLogic
             var response = await _httpClient.GetAsync(uri);
             if (!response.IsSuccessStatusCode)
             {
-                return new CatsModel { Cats = new List<CatPicture>() };
+                return new CatsModel { Cats = new List<Tuple<CatPicture, CatPicture>>() };
             }
 
             var content = await response.Content.ReadAsStringAsync();
