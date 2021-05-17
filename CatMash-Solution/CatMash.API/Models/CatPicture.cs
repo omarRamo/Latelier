@@ -9,7 +9,9 @@ namespace CatMash.API.Models
     public class CatPicture
     {
         public int Id { get; set; }
+        
         public string Url { get; set; }
+        
         [IgnoreMap]
         public Score Score { get; set; }
     }

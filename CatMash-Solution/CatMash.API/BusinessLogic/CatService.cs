@@ -18,11 +18,14 @@ namespace CatMash.API.BusinessLogic
         private readonly ILogger<CatService> _logger;
         private readonly IMapper _mapper;
         private readonly ICatPictureRepository _catPictureRepository;
-        public CatService(ILogger<CatService> logger, IMapper mapper, ICatPictureRepository catPictureRepository)
+        private readonly IVoteRepository _voteRepository;
+        private const int MAX_RANDOM_TRY = 50;
+        public CatService(ILogger<CatService> logger, IMapper mapper, ICatPictureRepository catPictureRepository, IVoteRepository voteRepository)
         {
             _logger = logger;
             _mapper = mapper;
             _catPictureRepository = catPictureRepository;
+            _voteRepository = voteRepository;
         }
         public CatPicturesResponse GetCats()
         {
@@ -55,6 +58,42 @@ namespace CatMash.API.BusinessLogic
             {
                 Cats = listofT
             };
+        }
+
+        public Tuple<CatPicture, CatPicture> GetCandidatesCats()
+        {
+            var firstCat = _mapper.Map<CatPicture>(_catPictureRepository.GetCatPictureRandomly());
+
+
+            var nbrTrie = 0;
+
+            var secondCat = _mapper.Map<CatPicture>(_catPictureRepository.GetCatPictureRandomly());
+            while (secondCat.Id == firstCat.Id && nbrTrie < MAX_RANDOM_TRY)
+            {
+                secondCat = _mapper.Map<CatPicture>(_catPictureRepository.GetCatPictureRandomly());
+                if (secondCat.Id != firstCat.Id)
+                {
+                    break;
+                }
+            }
+
+            if (secondCat.Id == firstCat.Id)
+            {
+                return null;
+            }
+            else
+            {
+                return Tuple.Create(firstCat, secondCat);
+            }
+
+        }
+
+        public bool InsertVote(VoteRequest voteRequest)
+        {
+            var vote = _mapper.Map<TVote>(voteRequest);
+            var updateCount = _voteRepository.InsertVote(vote);
+
+            return updateCount > 0;
         }
     }
 }

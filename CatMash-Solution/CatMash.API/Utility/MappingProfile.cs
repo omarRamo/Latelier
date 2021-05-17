@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CatMash.API.DTO;
+using CatMash.API.Messages;
 using CatMash.API.Models;
 using CatMash.DataAccess.Entities;
 using System;
@@ -14,7 +15,8 @@ namespace CatMash.API.Utility
         public MappingProfile()
         {
             // Add as many of these lines as you need to map your objects
-            CreateMap<TCatPicture, CatPictureDTO>();
+            CreateMap<TCatPicture, CatPicture>();
+            CreateMap<VoteRequest, TVote>();
         }
     }
 }

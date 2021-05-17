@@ -1,5 +1,6 @@
 ﻿using CatMash.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,11 @@ namespace CatMash.DataAccess.Repository
             }
 
             return _catMashDbContext.TCatPicture.Where(c => c.Id == id).FirstOrDefault();
+        }
+
+        public TCatPicture GetCatPictureRandomly()
+        {
+            return _catMashDbContext.TCatPicture.OrderBy(o => Guid.NewGuid()).First();
         }
     }
 }

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace CatMash.MVC.BusinessLogic
@@ -37,6 +38,27 @@ namespace CatMash.MVC.BusinessLogic
             var content = await response.Content.ReadAsStringAsync();
 
             return JsonConvert.DeserializeObject<CatsModel>(content);
+        }
+
+        public async Task<Tuple<CatPicture, CatPicture>> GetCatsForVote()
+        {
+            var uri = $"{_apiConfiguration.ApiPath}/vote";
+            var response = await _httpClient.GetAsync(uri);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonConvert.DeserializeObject<Tuple<CatPicture, CatPicture>>(content);
+        }
+
+        public async Task SendVote(VoteModel vote)
+        {
+            var uri = $"{_apiConfiguration.ApiPath}/vote";
+
+            var content = new StringContent(JsonConvert.SerializeObject(vote), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(uri, content);
+
+
+            response.EnsureSuccessStatusCode();
         }
 
     }

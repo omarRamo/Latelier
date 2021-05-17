@@ -10,5 +10,7 @@ namespace CatMash.DataAccess.Repository
         IEnumerable<TCatPicture> GetCatsPictures();
 
         TCatPicture GetCatPictureById(int id);
+
+        TCatPicture GetCatPictureRandomly();
     }
 }

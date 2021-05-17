@@ -41,9 +41,8 @@ namespace CatMash.API
             services.AddSingleton(mapper);
 
             services.AddTransient<ICatPictureRepository, CatPictureRepository>();
+            services.AddTransient<IVoteRepository, VoteRepository>();
             services.AddTransient<ICatService, CatService>();
-
-            //services.AddDbContext<CatMashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CatMashContext")));
 
             services.AddDbContext<CatMashDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CatMashContext")));
         }
