@@ -1,4 +1,5 @@
 ﻿using CatMash.API.BusinessLogic;
+using CatMash.API.Messages;
 using CatMash.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,22 @@ namespace CatMash.API.Controllers
             var catscoresResponses = _catService.GetCats();
             _logger.LogInformation("Get cats");
             return Ok(catscoresResponses);
+        }
+
+        [HttpGet]
+        [Route("vote")]
+        public IActionResult Candidates()
+        {
+            var catscoresResponses = _catService.GetCandidatesCats();
+
+            return Ok(catscoresResponses);
+        }
+
+        [HttpPost]
+        [Route("vote")]
+        public void Vote([FromBody] VoteRequest voteRequest)
+        {
+            _catService.InsertVote(voteRequest);
         }
 
     }
