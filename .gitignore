@@ -7,3 +7,6 @@
 /CatMash-Solution/CatMash.MVC/bin/Debug/netcoreapp3.1
 *.dll
 /CatMash-Solution/CatMash.API/obj
+*.pdb
+*.v2
+/CatMash-Solution/CatMash.DataAccess/obj

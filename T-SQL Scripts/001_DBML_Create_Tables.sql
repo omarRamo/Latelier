@@ -17,10 +17,10 @@ CREATE TABLE [T_CatPicture] (
 GO
 
 CREATE TABLE [T_Vote] (
-    [VoteId] int NOT NULL IDENTITY,
+    [Id] int NOT NULL IDENTITY,
     [CatId] int NOT NULL,
     [CreationDate] datetime NULL
-    CONSTRAINT [PK_Vote] PRIMARY KEY ([VoteId]),
+    CONSTRAINT [PK_Vote] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Vote_WinCat_CatId] FOREIGN KEY ([CatId]) REFERENCES [T_CatPicture] ([Id]),
 );
 GO

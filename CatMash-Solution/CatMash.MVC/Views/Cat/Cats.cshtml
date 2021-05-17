@@ -1,30 +1,38 @@
 ﻿@model CatsModel
 
 <div class="row">
-    <div class="col-xs-12 col-sm-offset-3 col-sm-6">
-        <div class="panel panel-default">
-            <div class="panel-heading c-list">
-                <span class="title">Scores</span>
-            </div>
 
-            <ul class="list-group" id="contact-list">
+    <div class="container-fluid">
+        <h1>Final Score !</h1>
+        <p>Les scores sont calculés en multipliant le nombre de votes par un poids qui est égal à 10.</p>
+        <p>Cette liste de chats est ordonnées par le score le plus haut vers le plus bas.</p>
+        
 
-                @foreach (var cat in Model.Cats)
-                {
-    <li class="list-group-item">
-        <div class="col-xs-12 col-sm-4">
-            <img src="@cat?.Url" alt="cat id @cat.Id" class="img-responsive img-responsive" />
-        </div>
-        <div class="col-xs-12 col-sm-8">
-
-            Score <span class="badge badge-light">@cat?.Score?.TotalScore</span> <br />
-            Nombre de votes <span class="badge badge-light">@cat?.Score?.VoteCount</span><br /><br />
-        </div>
-        <div class="clearfix"></div>
-    </li>}
-            </ul>
-        </div>
+        @foreach (var cat in Model.Cats)
+        {
+                        <div class="row">
+                            <div class="col-sm-3 col-md-6 col-lg-6">
+                                <img src="@cat.Item1?.Url" alt="cat id @cat.Item1.Id" class="img-fluid" />
+                            </div>
+                            <div class="col-sm-9 col-md-6 col-lg-6">
+                                <img src="@cat.Item2?.Url" alt="cat id @cat.Item2.Id" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-6 col-lg-6">
+                                Score <span class="badge badge-light">@cat.Item1?.Score?.TotalScore</span> <br />
+                                Nombre de votes <span class="badge badge-light">@cat.Item1?.Score?.VoteCount</span><br /><br />
+                            </div>
+                            <div class="col-sm-9 col-md-6 col-lg-6">
+                                Score <span class="badge badge-light">@cat.Item2?.Score?.TotalScore</span> <br />
+                                Nombre de votes <span class="badge badge-light">@cat.Item2?.Score?.VoteCount</span><br /><br />
+                            </div>
+                        </div>
+}
     </div>
-</div>
+            @*</ul>*@
+        </div>
+    @*</div>*@
+@*</div>*@
 
 

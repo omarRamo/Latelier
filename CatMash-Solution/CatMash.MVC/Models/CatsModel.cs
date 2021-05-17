@@ -8,6 +8,6 @@ namespace CatMash.MVC.Models
 {
     public class CatsModel
     {
-        public IEnumerable<CatPicture> Cats { get; set; }
+        public IEnumerable<Tuple<CatPicture, CatPicture>> Cats { get; set; }
     }
 }

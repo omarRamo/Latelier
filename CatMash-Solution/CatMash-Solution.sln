@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatMash.API", "CatMash.API\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatMash.MVC", "CatMash.MVC\CatMash.MVC.csproj", "{C7C0E044-C7B8-4593-95AC-666889FB2CD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatMash.DataAccess", "CatMash.DataAccess\CatMash.DataAccess.csproj", "{7138C599-9E9C-4E6E-BDEA-44DC74182317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C7C0E044-C7B8-4593-95AC-666889FB2CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7C0E044-C7B8-4593-95AC-666889FB2CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7C0E044-C7B8-4593-95AC-666889FB2CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7138C599-9E9C-4E6E-BDEA-44DC74182317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7138C599-9E9C-4E6E-BDEA-44DC74182317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7138C599-9E9C-4E6E-BDEA-44DC74182317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7138C599-9E9C-4E6E-BDEA-44DC74182317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B284C2BC-5ECC-44DD-ABAC-CF62A99DEA10} = {40AF61EA-FEDD-4468-AE61-0E338A71C9DC}
 		{C7C0E044-C7B8-4593-95AC-666889FB2CD7} = {B576E309-2D1C-456E-B415-7B2CCD42026A}
+		{7138C599-9E9C-4E6E-BDEA-44DC74182317} = {40AF61EA-FEDD-4468-AE61-0E338A71C9DC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0442089E-2B22-4E08-9255-92B6505605D4}
