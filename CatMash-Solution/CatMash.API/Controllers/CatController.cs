@@ -1,13 +1,7 @@
 ﻿using CatMash.API.BusinessLogic;
 using CatMash.API.Messages;
-using CatMash.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CatMash.API.Controllers
 {

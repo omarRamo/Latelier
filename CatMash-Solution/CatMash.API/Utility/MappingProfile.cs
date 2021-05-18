@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using CatMash.API.DTO;
 using CatMash.API.Messages;
 using CatMash.API.Models;
 using CatMash.DataAccess.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CatMash.API.Utility
 {
