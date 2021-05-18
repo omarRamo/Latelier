@@ -1,11 +1,7 @@
 ﻿using CatMash.MVC.BusinessLogic;
 using CatMash.MVC.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CatMash.MVC.Controllers
