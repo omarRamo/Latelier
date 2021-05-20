@@ -28,23 +28,16 @@ namespace CatMash.API.BusinessLogic
         }
         public CatPicturesResponse GetCats()
         {
-            var listCatsPictures = _catPictureRepository.GetCatsPictures().ToList();
-
-            var catsPictures = new List<CatPicture>();
-
-            foreach (var cat in listCatsPictures)
-            {
-                catsPictures.Add(new CatPicture
+            var catsPictures = _catPictureRepository.GetCatsPictures().Select( p => 
+                new CatPicture()
                 {
-                    Id = cat.Id,
-                    Url = cat.Url,
-                    Score = ScoreCalculator.CalculateScore(cat.TVoteWinCat.Count())
-                });
-            }
+                    Id = p.Id,
+                    Url = p.Url,
+                    Score = ScoreCalculator.CalculateScore(p.TVoteWinCat.Count())
+                }
+            ).OrderBy(c => c.Score?.TotalScore)
+             .ThenBy(c => c.Id).ToList();
 
-            catsPictures = catsPictures.OrderBy(c => c.Score?.TotalScore)
-                     .OrderByDescending(c => c.Score?.TotalScore)
-                     .ThenBy(c => c.Id).ToList();
 
             var listofT = new List<Tuple<CatPicture, CatPicture>>(); 
             for (int i = 0; i < catsPictures.Count - 1;)
